@@ -1,13 +1,16 @@
 package com.sprintboot.evote.controller;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -265,6 +268,13 @@ public class LoginController {
 	        String aadhar = (String) formData.get("aadhar");
 	        String phoneNo = (String) formData.get("phoneNo");
 
+			Optional<user> existingUser = userRepository.findByAadhar(aadhar);
+			if (existingUser.isPresent()) {
+				response.put("message", "User with this Aadhar number already exists.");
+				response.put("status", "error");
+				return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+			}
+	
 	        user newUser = new user();
 	        newUser.setFname(fname);
 	        newUser.setLname(lname);
@@ -278,6 +288,14 @@ public class LoginController {
 	        int stateId = Integer.parseInt((String) formData.get("state_id"));
 	        int districtId = Integer.parseInt((String) formData.get("district_id"));
 	        int constituentId = Integer.parseInt((String) formData.get("constituent_id"));
+
+			LocalDate today = LocalDate.now();
+            Period age = Period.between(dob, today);
+             if (age.getYears() < 18) {
+            response.put("message", "User must be 18 years or older.");
+            response.put("status", "error");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
 
 	        voter newVoter = new voter();
 	        newVoter.setDob(dob);
