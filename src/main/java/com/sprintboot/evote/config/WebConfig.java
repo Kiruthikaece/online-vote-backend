@@ -13,7 +13,7 @@ public class WebConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:4200");  // Angular frontend origin
+        config.addAllowedOrigin("https://online-voting-poll.onrender.com");  // Angular frontend origin
         config.addAllowedHeader("*");  // Allow all headers
         config.addAllowedMethod("*");  // Allow all HTTP methods
 
