@@ -213,56 +213,14 @@ public class LoginController {
 	    }
 	}
 
-//	@PostMapping("/api/add-voter")
-//    public ResponseEntity<String> registerVoter(@RequestBody Map<String, Object> formData) {
-//        try {
-//            String fname = (String) formData.get("fname");
-//            String lname = (String) formData.get("lname");
-//            String aadhar = (String) formData.get("aadhar");
-//            String phoneNo = (String) formData.get("phoneNo");
-//
-//
-//            user newUser = new user();
-//            newUser.setFname(fname);
-//            newUser.setLname(lname);
-//            newUser.setAadhar(aadhar);
-//            newUser.setPhoneno(phoneNo);
-//            newUser = userRepository.save(newUser);
-//
-//            // Extract voter data
-//            String dobString = (String) formData.get("dob");
-//            LocalDate dob = LocalDate.parse(dobString, DateTimeFormatter.ISO_DATE);
-//            String gender = (String) formData.get("gender");
-//            int stateId = Integer.parseInt((String) formData.get("state_id")); // Convert String to int
-//            int districtId = Integer.parseInt((String) formData.get("district_id"));
-//            int constituentId = Integer.parseInt((String) formData.get("constituent_id"));
-//
-//            // Save voter data
-//            voter newVoter = new voter();
-//            
-//            newVoter.setDob(dob);
-//            newVoter.setGender(gender);
-//            newVoter.setStates(new state(stateId)); 
-//            newVoter.setDistrict(new District(districtId));
-//            newVoter.setConstituent(new Constituent(constituentId));
-//            newVoter.setAadhar(aadhar);
-//            newVoter.setVoterId(newUser.getId().intValue()); 
-//            voterRepository.save(newVoter);
-//
-//            return ResponseEntity.ok("Voter registered successfully!");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
-//        }
-//    }
-//	
-//	
+
 	
 	
 	@PostMapping("/api/add-voter")
 	public ResponseEntity<Map<String, Object>> registerVoter(@RequestBody Map<String, Object> formData) {
 	    Map<String, Object> response = new HashMap<>();
 	    try {
-	        // Extract user and voter data (same as your current implementation)
+	
 	        String fname = (String) formData.get("fname");
 	        String lname = (String) formData.get("lname");
 	        String aadhar = (String) formData.get("aadhar");
@@ -280,7 +238,7 @@ public class LoginController {
 	        newUser.setLname(lname);
 	        newUser.setAadhar(aadhar);
 	        newUser.setPhoneno(phoneNo);
-	        newUser = userRepository.save(newUser);
+	        
 
 	        String dobString = (String) formData.get("dob");
 	        LocalDate dob = LocalDate.parse(dobString, DateTimeFormatter.ISO_DATE);
@@ -297,6 +255,7 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
+	     	newUser = userRepository.save(newUser);
 	        voter newVoter = new voter();
 	        newVoter.setDob(dob);
 	        newVoter.setGender(gender);

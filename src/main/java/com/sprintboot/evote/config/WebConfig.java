@@ -13,12 +13,13 @@ public class WebConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("https://online-voting-poll.onrender.com");  // Angular frontend origin
-        config.addAllowedHeader("*");  // Allow all headers
-        config.addAllowedMethod("*");  // Allow all HTTP methods
+        config.addAllowedOrigin("https://online-voting-poll.onrender.com");  
+       // config.addAllowedOrigin("http://localhost:4200");  
+        config.addAllowedHeader("*"); 
+        config.addAllowedMethod("*");  
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/api/**", config);  // Apply to /api/** endpoints
+        source.registerCorsConfiguration("/api/**", config);  
 
         return new CorsFilter(source);
     }

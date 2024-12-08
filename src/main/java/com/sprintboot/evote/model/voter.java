@@ -3,7 +3,6 @@ package com.sprintboot.evote.model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +22,7 @@ public class voter {
 	    private boolean isvote;
 	    private int voter_id;
 	    private String aadhar;
-	    private String voterPinNo;
+	    
 
 	    
 	    
@@ -99,12 +98,6 @@ public class voter {
 		}
 		public void setAadhar(String aadhar) {
 			this.aadhar = aadhar;
-		}
-		public String getVoterPinNo() {
-			return voterPinNo;
-		}
-		public void setVoterPinNo(String voterPinNo) {
-			this.voterPinNo = voterPinNo;
 		}
 		
 		
